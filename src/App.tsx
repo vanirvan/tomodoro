@@ -26,11 +26,13 @@ export default function App() {
       <Navbar />
 
       {/* Timer */}
-      <Card className="mx-auto max-w-xl rounded-3xl bg-white/30 shadow-xl backdrop-blur-md">
-        <CardContent>
-          <Timer />
-        </CardContent>
-      </Card>
+      <div className="px-4 pb-6">
+        <Card className="mx-auto max-w-xl rounded-3xl bg-white/30 shadow-xl backdrop-blur-md">
+          <CardContent>
+            <Timer />
+          </CardContent>
+        </Card>
+      </div>
 
       <HistorySheet />
       <SettingsSheet />

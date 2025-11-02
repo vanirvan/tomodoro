@@ -15,7 +15,7 @@ export default function Navbar() {
   const sessionCount = sessions?.length || 0;
 
   return (
-    <nav className="sticky top-0 container mx-auto px-4 py-6">
+    <nav className="sticky top-0 z-10 container mx-auto px-4 py-6 backdrop-blur-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-foreground text-2xl font-bold">Tomodoro</h1>
