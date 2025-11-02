@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+import { PlayIcon } from "lucide-react";
 
 import {
   Select,
@@ -13,13 +14,13 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 
 import { settingsSheetAtom } from "@/lib/store";
 
-import { useLocalStorage } from "@/hooks";
+import { useLocalStorage, useSoundPlayer } from "@/hooks";
 
+import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 
@@ -44,6 +45,7 @@ const COLOR_PRESETS = [
 
 export default function SettingsSheet() {
   const [sheetOpen, setSheetOpen] = useAtom(settingsSheetAtom);
+  const { testSound } = useSoundPlayer();
 
   const [focusDuration, setFocusDuration] = useLocalStorage(
     "focusDuration",
@@ -165,7 +167,17 @@ export default function SettingsSheet() {
 
           {/* Focus Sound */}
           <div className="space-y-4">
-            <Label>Focus Complete Sound</Label>
+            <div className="flex items-center justify-between">
+              <Label>Focus Complete Sound</Label>
+              <Button
+                variant={"outline"}
+                size={"icon-sm"}
+                className="rounded-full"
+                onClick={() => testSound(focusSound)}
+              >
+                <PlayIcon className="h-4 w-4" />
+              </Button>
+            </div>
             <Select value={focusSound} onValueChange={setFocusSound}>
               <SelectTrigger className="w-full">
                 <SelectValue />
@@ -182,7 +194,17 @@ export default function SettingsSheet() {
 
           {/* Break Sound */}
           <div className="space-y-4">
-            <Label>Break Complete Sound</Label>
+            <div className="flex items-center justify-between">
+              <Label>Break Complete Sound</Label>
+              <Button
+                variant={"outline"}
+                size={"icon-sm"}
+                className="rounded-full"
+                onClick={() => testSound(breakSound)}
+              >
+                <PlayIcon className="h-4 w-4" />
+              </Button>
+            </div>
             <Select value={breakSound} onValueChange={setBreakSound}>
               <SelectTrigger className="w-full">
                 <SelectValue />

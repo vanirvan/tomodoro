@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 import { Session } from "@/lib/types";
 
-import { useLocalStorage, useReadLocalStorage } from "@/hooks";
+import { useSoundPlayer, useLocalStorage, useReadLocalStorage } from "@/hooks";
 
 export const Timer = () => {
   // Read settings from localStorage
@@ -27,6 +27,9 @@ export const Timer = () => {
     "tomodoro-sessions",
     [],
   );
+
+  // Sound player
+  const { playSoundByMode } = useSoundPlayer();
 
   // Derived values
   const duration = currentMode === "focus" ? focusDuration : breakDuration;
@@ -54,10 +57,9 @@ export const Timer = () => {
   };
 
   // Timer completion handler
-  const handleComplete = () => {
-    // Play sound notification (implementation needed)
-    const sound = currentMode === "focus" ? focusSound : breakSound;
-    console.log(`Playing ${sound} sound`);
+  const handleComplete = async () => {
+    // Play sound notification
+    await playSoundByMode(currentMode);
 
     // Auto-switch modes after completion
     if (currentMode === "focus") {
